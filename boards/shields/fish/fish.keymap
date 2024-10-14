@@ -12,17 +12,15 @@
 #define LDEF 0
 #define LMOD 1
 #define LNAV 2
-#define LMSK 3
-#define LFUN 4
-#define LSYM 5
-#define LADJ 6
+#define LFUN 3
+#define LSYM 4
+#define LADJ 5
 /{
     keymap {
         compatible = "zmk,keymap";
         layer_default:layer_default{};
         layer_mod:layer_mod{};
         layer_nav:layer_nav{};
-        layer_msk:layer_msk{};
         layer_fun:layer_fun{};
         layer_sym:layer_sym{};
         layer_adj:layer_adj{};
@@ -35,6 +33,7 @@
         // custom key behaviors //
         //////////////////////////
 */
+// macro for mod tap
 #define MC(X) LCTRL X
 #define MS(X) LSHFT X
 #define MA(X) LALT X
@@ -58,13 +57,6 @@
         // 
         // hold and tap flavors
         // 
-        mth: mod_tap_hold_flavor {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&kp>, <&kp>;
-        };
         lth: layer_tap_hold_flavor {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -73,6 +65,8 @@
             bindings = <&mo>, <&kp>;
         };
         lm: momentally_layer_and_modifier {
+            // activate momentally layer and press (modifier) key
+            // &lm LMOD LCTRL : activate modifier layer with LCTRL hold
             compatible = "zmk,behavior-macro-two-param";
             wait-ms = <0>;
             tap-ms = <0>;
@@ -89,32 +83,18 @@
                 , <&macro_release &mo MACRO_PLACEHOLDER>
                 ;
         };
-        smo: sticky_key_and_mo {
+        skp: sticky_key_and_kp {
+            // &skp LSHFT LSHFT : tap to sticky shift, hold to shift
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo>, <&sk>;
-        };
-        // 
-        // custom keys
-        // 
-        caps_word_lock: caps_word_and_lock{
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&caps_word>, <&kp CAPSLOCK>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp>, <&sk>;
         };
         bspc_del: bspc_and_del{
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp BSPC>, <&kp DEL>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        lcbspc_del: ctrl_bspc_and_del{
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp LC(BSPC)>, <&kp DEL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
@@ -157,41 +137,6 @@
             slow-release;
         };
         
-        //left msk
-        combo_L_23M_MSK {
-            key-positions = <10 11>;
-            bindings = <&mkp MB4>;
-            layers = <LMSK>;
-        };
-        combo_L_34M_MSK {
-            key-positions = <11 12>;
-            bindings = <&mkp MB5>;
-            layers = <LMSK>;
-        };
-        
-
-        //left zxcv
-        //combo_L_1MB {
-        //    key-positions = <9 20>;
-        //    bindings = <&kp LC(Z)>;
-        //    layers = <LMOD LNAV LFUN LSYM LADJ>;
-        //};
-        //combo_L_2MB {
-        //    key-positions = <10 21>;
-        //    bindings = <&kp LC(X)>;
-        //    layers = <LMOD LNAV LFUN LSYM LADJ>;
-        //};
-        //combo_L_3MB {
-        //    key-positions = <11 22>;
-        //    bindings = <&kp LC(C)>;
-        //    layers = <LMOD LNAV LFUN LSYM LADJ>;
-        //};
-        //combo_L_4MB {
-        //    key-positions = <12 23>;
-        //    bindings = <&kp LC(V)>;
-        //    layers = <LMOD LNAV LFUN LSYM LADJ>;
-        //};
-//
         // right basic
         combo_R_4TM {
             key-positions = <5 15>;
@@ -208,16 +153,17 @@
         combo_R_23B {
             key-positions = <25 26>;
             bindings = <&kp PRCNT>;
+            layers = < LDEF LMOD LNAV LSYM LADJ>;
         };
 
         // thum
         combo_L_thum {
             key-positions = <28 29>;
-            bindings = <&smo LMSK LSHFT>;
+            bindings = <&skp LSHFT LSHFT>;
         };
         combo_R_thum {
             key-positions = <30 31>;
-            bindings = <&caps_word_lock>;
+            bindings = <&caps_word>;
         };
 
         // thum mod
@@ -239,7 +185,6 @@
         combo_L_4M_thum {
             key-positions = <12 29>;
             bindings = <&lm LMOD LSHFT>;
-            
         };
         
     };
@@ -252,11 +197,12 @@
 */
 &layer_default {
     bindings = <
-               &kp W  &kp U &kp F &kp Q           &kp K &kp L &kp R &kp Y   
+               &kp W  &kp U &kp F &lm LMOD LCTRL           &kp K &kp L &kp R &kp Y   
 &kp LALT &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
          &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
         &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
         >;
+               //&kp W  &kp U &kp F &kp Q           &kp K &kp L &kp R &kp Y   
 };
 
 &layer_mod {
@@ -264,27 +210,19 @@
                     &kp W      &kp U     &kp F     &kp Q        &kp K &kp L &kp R &kp Y   
 &kp LGUI  &mt MC(E) &mt MS(I)  &mt MC(A) &mt MS(O) &kp MINUS    &kp G &kp T &kp N &kp S     &mt MC(H) &mt MG(P)
           &mt MS(Z) &mt MA(X)  &kp C     &kp V                        &kp D &kp M &mt MA(J) &mt MS(B) 
-                                 &trans   &trans                 &lt LNAV LC(SPACE) &lcbspc_del
+                                 &trans   &trans                 &lt LNAV LC(SPACE) &bspc_del
         >;
 };
 
 &layer_nav {
     bindings = <
-                    &kp N4        &kp DEL     &none     &none       &none    &kp PG_DN     &kp PG_UP     &kp RET
-&kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &none       &kp LEFT &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp LGUI 
+                    &kp N4        &kp DEL     &none     &kp N       &none    &kp PG_DN     &kp PG_UP     &kp RET
+&kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &kp DOT     &kp LEFT &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp LGUI 
          &kp LSHFT  &kp LALT      &none       &none                          &kp LC(PG_UP) &kp LC(PG_DN) &kp HOME  &kp END    
                                   &trans    &kp RET                          &trans   &bspc_del
     >;
 };
 
-&layer_msk {
-    bindings = <
-                       &kp W         &kp T       &kp DEL   &kp PG_UP       &none &none &none &none
-&mt MG(RET) &kp LCTRL  &mkp RCLK     &mkp MCLK   &mkp LCLK &kp PG_DN       &none &none &none &none &none &none 
-            &kp LSHFT  &kp X         &kp C       &kp V                    &none &none &none &none   
-                                  &trans    &kp RET                          &trans   &bspc_del
-    >;
-};
 
 &layer_fun {
     bindings = <
