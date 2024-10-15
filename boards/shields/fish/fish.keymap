@@ -197,7 +197,7 @@
 */
 &layer_default {
     bindings = <
-               &kp W  &kp U &kp F &lm LMOD LCTRL           &kp K &kp L &kp R &kp Y   
+               &kp W  &kp U &kp F &kp Q           &kp K &kp L &kp R &kp Y   
 &kp LALT &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
          &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
         &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
