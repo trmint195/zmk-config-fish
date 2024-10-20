@@ -18,7 +18,7 @@
 /{
     keymap {
         compatible = "zmk,keymap";
-        layer_default:layer_default{};
+        layer_def:layer_def{};
         layer_mod:layer_mod{};
         layer_nav:layer_nav{};
         layer_fun:layer_fun{};
@@ -188,12 +188,12 @@
         // keymaps //
         /////////////
 */
-&layer_default {
+&layer_def {
     bindings = <
-                &kp W  &kp U &kp F &kp  Q          &kp K &kp L &kp R &kp Y   
-&mo LFUN  &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
-          &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
-        &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
+                     &kp W  &kp U &kp F &kp  Q          &kp K &kp L &kp R &kp Y   
+&lt LFUN ESC   &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
+               &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
+                   &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
         >;
 };
 
@@ -208,7 +208,7 @@
 
 &layer_nav {
     bindings = <
-                    &kp N4        &none       &none     &kp N       &none    &kp PG_DN     &kp PG_UP     &kp RET
+                    &none         &none       &none     &kp N       &none    &kp PG_DN     &kp PG_UP     &kp RET
 &kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &kp DOT     &kp LEFT &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp LGUI 
          &kp LSHFT  &kp LALT      &none       &none                          &kp LC(PG_UP) &kp LC(PG_DN) &kp HOME  &kp END    
                                   &trans    &kp RET                          &trans   &bspc_del
@@ -218,7 +218,7 @@
 
 &layer_fun {
     bindings = <
-                   &kp LA(TAB) &kp TAB &kp LS(F5) &kp F12     &kp DOT   &kp N7 &kp N8 &kp N9      
+                   &kp LALT    &kp TAB &kp LS(F5) &kp F12     &kp DOT   &kp N7 &kp N8 &kp N9      
 &kp F1  &mt MC(F2) &kp F3      &kp F4  &kp F5     &kp F11     &kp COMMA &kp N4 &kp N5 &kp N6 &kp N0 &kp MINUS   
         &mt MS(F7) &mt MA(F8)  &kp F9  &kp F10                          &kp N1 &kp N2 &kp N3 &kp N0      
                       &trans  &kp RET                &kp SPACE &bspc_del
