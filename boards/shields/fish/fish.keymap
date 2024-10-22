@@ -170,16 +170,16 @@
             bindings = <&lm LMOD LSHFT>;
             slow-release;
         };
-        combo_L_3M_thum {
+        combo_L_0M_thum { // gui
+            key-positions = <8 29>;
+            bindings = <&lm LMOD LGUI>;
+            slow-release;
+        };
+        combo_L_3M_thum { // ctrl
             key-positions = <11 29>;
             bindings = <&lm LMOD LCTRL>;
             slow-release;
         };
-        combo_L_4M_thum {
-            key-positions = <12 29>;
-            bindings = <&lm LMOD LSHFT>;
-        };
-        
     };
 };
 
@@ -242,7 +242,3 @@
                                       &trans       &trans                                    &trans      &trans      
     >;
 };
-
-
-
-
