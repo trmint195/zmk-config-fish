@@ -1,259 +1,164 @@
+// キーマップを更新する方法は https://o24.works/fish/guide を参照
+// 視覚的に編集するには https://o24.works/fish/editor を参照
+
+
+// 定義を呼んでくる
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/mouse.h>
-
-/*
-        ////////////////////
-        // layer settings //
-        ////////////////////
-*/
-#define LDEF 0
-#define LMOD 1
-#define LNAV 2
-#define LFUN 3
-#define LSYM 4
-#define LADJ 5
-/{
-    keymap {
-        compatible = "zmk,keymap";
-        layer_def:layer_def{};
-        layer_mod:layer_mod{};
-        layer_nav:layer_nav{};
-        layer_fun:layer_fun{};
-        layer_sym:layer_sym{};
-        layer_adj:layer_adj{};
-    };
-};
 
 
-/*
-        //////////////////////////
-        // custom key behaviors //
-        //////////////////////////
-*/
-// macro for mod tap
-#define MC(X) LCTRL X
-#define MS(X) LSHFT X
-#define MA(X) LALT X
-#define MG(X) LGUI X
+// 特殊入力の挙動を調整できる
 
 &mt {
-    tapping-term-ms = <175>;
     flavor = "tap-preferred";
+    tapping-term-ms = <225>;
+    quick-tap-ms = <200>;
+    require-prior-idle-ms = <150>;
 };
-&lt {
-    tapping-term-ms = <175>;
-    flavor = "balanced";
-};
-&sk {
-    quick-release;
-};
-&caps_word {
-    continue-list = <UNDERSCORE MINUS BACKSPACE>;
-};
-/ {
-    behaviors {
-        // original behaviors
-        smo: sticky_key_and_mo {
-            // &smo LFUN LSHFT : tap to sticky shift, hold to function layer
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&mo>, <&sk>;
-        };
-        bspc_del: bspc_and_del{
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp BSPC>, <&kp DEL>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
 
-        // behaviors for mod layer
-        lth: layer_tap_hold_flavor {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&mo>, <&kp>;
-        };
-        lm: momentally_layer_and_modifier {
-            // activate momentally layer and press (modifier) key
-            // &lm LMOD LCTRL : activate modifier layer with LCTRL hold
-            compatible = "zmk,behavior-macro-two-param";
-            wait-ms = <0>;
-            tap-ms = <0>;
-            #binding-cells = <2>;
-            bindings
-                = <&macro_param_1to1>
-                , <&macro_press &mo MACRO_PLACEHOLDER>
-                , <&macro_param_2to1>
-                , <&macro_press &kp MACRO_PLACEHOLDER>
-                , <&macro_pause_for_release>
-                , <&macro_param_2to1>
-                , <&macro_release &kp MACRO_PLACEHOLDER>
-                , <&macro_param_1to1>
-                , <&macro_release &mo MACRO_PLACEHOLDER>
-                ;
-        };
+&lt {
+    flavor = "balanced";
+    quick-tap-ms = <200>;
+};
+
+&sk {
+};
+
+&sl {
+};
+
+&caps_word {
+};
+
+&key_repeat {
+};
+
+
+/ {
+    // 独自の入力を定義できる（上級者向け）
+
+    behaviors {
     };
 
     macros {
-        // alt+tab on tap, continue to press alt on hold. 
-        alt_tab: alt_tab {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <0>;
-            bindings
-                = <&macro_press &kp LALT>
-                , <&macro_tap &kp TAB>
-                , <&macro_pause_for_release>
-                , <&macro_release &kp LALT>
-                ;
-        };
     };
-};
+
+    conditional_layers {
+    };
 
 
-/*
-        ////////////
-        // combos //
-        ////////////
-*/
-/{
+    // 複数キーの同時押しに特別の入力を設定できる
+    // キー番号早見表：
     //       0  1  2  3     4  5  6  7
     // 8  9 10 11 12 13    14 15 16 17 18 19
     //   20 21 22 23          24 25 26 27
     //            28 29    30 31
+
     combos {
         compatible = "zmk,combos";
-        timeout-ms = <100>;
+        timeout-ms = <150>;
+        require-prior-idle-ms = <150>;
 
-        //adj
-        combo_LR_1M {
-            key-positions = <8 19>;
-            bindings = <&mo LADJ>;
-            slow-release;
-        };
-
-        //left basic
-        combo_L_23T {
-            key-positions = <0 1>;
-            bindings = <&kp ESC>;
+        combo_lang2 {
+            key-positions = <21 22>;
+            bindings = <&kp LANG2>;
         };
 
-        // right basic
-        combo_R_4TM {
-            key-positions = <5 15>;
-            bindings = <&kp COMMA>;
-        };
-        combo_R_3TM {
-            key-positions = <6 16>;
-            bindings = <&kp DOT>;
-        };
-        combo_R_2TM {
-            key-positions = <7 17>;
-            bindings = <&kp SEMI>;
-        };
-        combo_R_23B {
+        combo_lang1 {
             key-positions = <25 26>;
-            bindings = <&kp PRCNT>;
-            layers = < LDEF LMOD LNAV LSYM LADJ>;
+            bindings = <&kp LANG1>;
         };
 
-        // thum
-        combo_L_thum {
-            key-positions = <28 29>;
-            bindings = <&smo LFUN LSHFT>;
-        };
-        combo_R_thum {
-            key-positions = <30 31>;
-            bindings = <&caps_word>;
-        };
-
-        // thum mod
-        combo_L_1M_thum { // ctrl
-            key-positions = <9 29>;
-            bindings = <&lm LMOD LCTRL>;
-            slow-release;
-        };
-        combo_L_1B_thum { // shift
-            key-positions = <20 29>;
-            bindings = <&lm LMOD LSHFT>;
-            slow-release;
-        };
-        combo_L_0M_thum { // gui
-            key-positions = <8 29>;
-            bindings = <&lm LMOD LGUI>;
-            slow-release;
-        };
-        combo_L_3M_thum { // ctrl
-            key-positions = <11 29>;
-            bindings = <&lm LMOD LCTRL>;
-            slow-release;
+        combo_studio_unlock {
+            key-positions = <20 21 22 23>;
+            bindings = <&studio_unlock>;
         };
     };
-};
+    
 
-/*
-        /////////////
-        // keymaps //
-        /////////////
-*/
-&layer_def {
-    bindings = <
-                     &kp W  &kp U &kp F &kp  Q          &kp K &kp L &kp R &kp Y   
-&lt LFUN ESC   &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
-               &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
-                   &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
-        >;
-};
+    // キーに入力を割り当てる
+    // 型（&...）は https://zmk.dev/docs/behaviors/... を参照
+    // キーコードは https://zmk.dev/docs/codes/... を参照
 
-&layer_mod {
-    bindings = <
-                    &kp W      &kp U     &kp F     &kp Q        &kp K &kp L &kp R &kp Y   
-&kp LGUI  &mt MC(E) &mt MS(I)  &mt MC(A) &mt MS(O) &kp MINUS    &kp G &kp T &kp N &kp S     &mt MC(H) &mt MG(P)
-          &mt MS(Z) &mt MA(X)  &kp C     &kp V                        &kp D &kp M &mt MA(J) &mt MS(B) 
-                                 &trans   &trans                 &lt LNAV LC(SPACE) &bspc_del
-        >;
-};
+    keymap {
+        compatible = "zmk,keymap";
 
-&layer_nav {
-    bindings = <
-                    &none         &none       &none     &kp N       &none    &kp PG_DN     &kp PG_UP     &kp RET
-&kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &kp DOT     &kp LEFT &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp LGUI 
-         &kp LSHFT  &kp LALT      &none       &none                          &kp LC(PG_UP) &kp LC(PG_DN) &kp HOME  &kp END    
-                                  &trans    &kp RET                          &kp SPACE   &bspc_del
-    >;
-};
+        layer_base {
+            bindings = <
+                        &kp L       &kp U       &kp F       &kp MINUS           &kp K       &kp W       &kp R       &kp Y       
+&kp Q       &kp E       &mt LGUI I  &mt LALT A  &mt LSHFT O &kp COMMA           &kp G       &mt RSHFT T &mt RALT N  &mt RGUI S  &kp H       &kp P       
+            &kp Z       &kp X       &kp C       &kp V                                       &kp D       &kp M       &kp J       &kp B       
+                                                &lt 1 BSPC  &mt LCTRL RET       &mt RCTRL TAB &lt 2 SPACE 
+            >;
+        };
 
+        layer_math {
+            bindings = <
+                        &kp N1      &kp N2      &kp N3      &trans              &kp CARET   &kp LT      &kp EQUAL   &kp GT      
+&kp TILDE   &kp N0      &mt LGUI N4 &mt LALT N5 &mt LSHFT N6 &kp DOT            &kp UNDER   &mt RSHFT PLUS &mt RALT MINUS &mt RGUI STAR &kp FSLH &kp PRCNT 
+            &kp DLLR    &kp N7      &kp N8      &kp N9                                      &kp EXCL    &kp QMARK   &kp COLON   &kp SEMI    
+                                                &none       &trans              &trans      &lt 6 SPACE 
+            >;
+        };
 
-&layer_fun {
-    bindings = <
-                   &alt_tab    &kp TAB &kp LS(F5) &kp F12     &kp DOT   &kp N7 &kp N8 &kp N9      
-&kp F1  &mt MC(F2) &kp F3      &kp F4  &kp F5     &kp F11     &kp COMMA &kp N4 &kp N5 &kp N6 &kp N0 &kp MINUS   
-        &mt MS(F7) &mt MA(F8)  &kp F9  &kp F10                          &kp N1 &kp N2 &kp N3 &kp N0      
-                      &trans   &trans                  &kp SPACE &bspc_del
-    >;
-};
+        layer_navi {
+            bindings = <
+                        &kp LBKT    &kp DQT     &kp RBKT    &kp AMPS            &kp C_VOL_UP &kp ESC    &kp UP      &kp CAPS    
+&kp AT      &kp HASH    &mt LCTRL LPAR &mt LALT SQT &mt LSHFT RPAR &kp PIPE     &kp C_VOL_DN &kp LEFT   &kp DOWN    &kp RIGHT   &kp C_BRI_UP &kp PSCRN  
+            &kp BSLH    &kp LBRC    &kp GRAVE   &kp RBRC                                    &kp C_PREV  &kp C_PP    &kp C_NEXT  &kp C_BRI_DN 
+                                                &lt 6 BSPC  &trans              &trans      &none       
+            >;
+        };
 
-&layer_sym {
-    bindings = <
-                       &kp AT   &kp HASH   &kp DLLR  &kp LBRC    &kp RBRC   &kp AMPS   &kp STAR  &kp UNDER   
-&kp TILDE &mt MC(EXCL) &kp LBKT &kp LPAR   &kp COLON &kp PIPE    &kp CARET  &kp FSLH   &kp RPAR  &kp RBKT  &mt MC(EQUAL) &kp PLUS 
-          &kp GRAVE    &kp LT   &kp MINUS  &kp GT                           &kp QMARK  &kp DQT   &kp SQT   &kp BSLH 
-                                &trans     &kp RET               &kp SPACE   &bspc_del
-    >;
-};
+        layer_mac_base {
+            bindings = <
+                        &kp L       &kp U       &kp F       &kp MINUS           &kp K       &kp W       &kp R       &kp Y       
+&kp Q       &kp E       &mt LCTRL I &mt LALT A  &mt LSHFT O &kp COMMA           &kp G       &mt RSHFT T &mt RALT N  &mt RCTRL S &kp H       &kp P       
+            &kp Z       &kp X       &kp C       &kp V                                       &kp D       &kp M       &kp J       &kp B       
+                                                &lt 4 BSPC  &mt LGUI RET        &mt RGUI TAB &lt 5 SPACE 
+            >;
+        };
 
-&layer_adj {
-    bindings = <
-                         &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_CLR       &trans      &trans      &trans      &trans      
-&bootloader &out OUT_BLE &bt BT_SEL 3 &bt BT_SEL 4 &trans       &bt BT_CLR       &trans      &trans      &trans      &trans      &trans      &bootloader
-            &out OUT_USB &trans       &trans       &trans                                    &trans      &trans      &trans      &trans      
-                                      &trans       &trans                                    &trans      &trans      
-    >;
+        layer_mac_math {
+            bindings = <
+                        &kp N1      &kp N2      &kp N3      &trans              &kp CARET   &kp LT      &kp EQUAL   &kp GT      
+&kp TILDE   &kp N0      &mt LCTRL N4 &mt LALT N5 &mt LSHFT N6 &kp DOT           &kp UNDER   &mt RSHFT PLUS &mt RALT MINUS &mt RCTRL STAR &kp FSLH &kp PRCNT 
+            &kp DLLR    &kp N7      &kp N8      &kp N9                                      &kp EXCL    &kp QMARK   &kp COLON   &kp SEMI    
+                                                &none       &trans              &trans      &lt 6 SPACE 
+            >;
+        };
+
+        layer_mac_navi {
+            bindings = <
+                        &kp LBKT    &kp DQT     &kp RBKT    &kp AMPS            &kp C_VOL_UP &kp ESC    &kp UP      &kp CAPS    
+&kp AT      &kp HASH    &mt LGUI LPAR &mt LALT SQT &mt LSHFT RPAR &kp PIPE      &kp C_VOL_DN &kp LEFT   &kp DOWN    &kp RIGHT   &kp C_BRI_UP &kp LS(LG(N3)) 
+            &kp BSLH    &kp LBRC    &kp GRAVE   &kp RBRC                                    &kp C_PREV  &kp C_PP    &kp C_NEXT  &kp C_BRI_DN 
+                                                &lt 6 BSPC  &trans              &trans      &none       
+            >;
+        };
+
+        layer_system {
+            bindings = <
+                        &bt BT_SEL 4 &bt BT_CLR &bt BT_CLR_ALL &out OUT_TOG     &tog 3      &kp INS     &kp HOME    &kp PG_UP   
+&kp F1      &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &kp F6          &kp F7      &kp DEL     &kp END     &kp PG_DN   &kp K_APP   &kp F12     
+            &kp F2      &kp F3      &kp F4      &kp F5                                      &kp F8      &kp F9      &kp F10     &kp F11     
+                                                &none       &none       &none       &none       
+            >;
+        };
+
+        extra1 {
+            status = "reserved";
+        };
+
+        extra2 {
+            status = "reserved";
+        };
+
+        extra3 {
+            status = "reserved";
+        };
+    };
 };
