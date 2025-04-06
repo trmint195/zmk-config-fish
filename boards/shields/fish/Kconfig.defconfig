@@ -1,22 +1,26 @@
 # Copyright (c) 2021 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-# 親機にしたい方をコメントアウト
-if SHIELD_FISH_LEFT
-# if SHIELD_FISH_RIGHT
-
-config ZMK_KEYBOARD_NAME
-    default "Fish Keyboard"
-
-config ZMK_SPLIT_ROLE_CENTRAL
-    default y
-
+if SHIELD_FISH_LEFT || SHIELD_FISH_RIGHT || SHIELD_FISH_DONGLE
+    config ZMK_SPLIT
+        default y
+    config ZMK_KEYBOARD_NAME
+        default "Fish"
 endif
 
+if SHIELD_FISH_DONGLE
+    config ZMK_SPLIT_ROLE_CENTRAL
+        default y
 
-if SHIELD_FISH_LEFT || SHIELD_FISH_RIGHT
+    config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+        default 2
 
-config ZMK_SPLIT
-    default y
+    # Set this to ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS + your desired number of BT profiles (default is 5)
+    config BT_MAX_CONN
+        default 7
+
+    # Set this to the same number as BT_MAX_CONN
+    config BT_MAX_PAIRED
+        default 7
 
 endif

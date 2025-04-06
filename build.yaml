@@ -18,7 +18,20 @@
 #
 ---
 include:
-  - board: seeeduino_xiao_ble
-    shield: fish_right
+  # - board: seeeduino_xiao_ble
+  #   shield: settings_reset
+  # - board: seeeduino_xiao_ble
+  #   shield: fish_dongle
   - board: seeeduino_xiao_ble
     shield: fish_left
+    artifact-name: fish_left_peripheral
+  - board: seeeduino_xiao_ble
+    shield: fish_left
+    artifact-name: fish_left_central
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
+  # - board: seeeduino_xiao_ble
+  #   shield: fish_right
+
+  #   snippet: zmk-usb-logging
+
+
