@@ -43,9 +43,11 @@
         scroll_enc_du: scroll_enc_du {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            bindings = <&msc MOVE_Y(-100)>, <&msc MOVE_Y(100)>;
+            //bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
             tap-ms = <20>;
         };
+
     };
 };
 
@@ -230,10 +232,10 @@
 &lt LFUN ESC   &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
                &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
                    &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
-                &bootloader &kp B &kp C &kp D
-                &kp E &kp F &kp G &kp H
+                &mkp LCLK &mmv MOVE_DOWN &msc SCRL_DOWN &none
+                &mkp RCLK &mmv MOVE_UP   &msc SCRL_UP &bootloader
         >;
-    sensor-bindings = <&inc_dec_kp TAB LS(TAB)>; 
+    sensor-bindings = <&scroll_enc_du>; 
 };
 
 &layer_mod {
@@ -270,7 +272,7 @@
                 &bootloader &kp B &kp C &kp D
                 &kp E &kp F &kp G &kp H
     >;
-    sensor-bindings = <&scroll_enc_du>; 
+    sensor-bindings = <&inc_dec_kp A B>; 
 };
 
 &layer_sym {
@@ -282,7 +284,7 @@
                 &bootloader &kp B &kp C &kp D
                 &kp E &kp F &kp G &kp H
     >;
-    sensor-bindings = <&scroll_enc_du>; 
+    sensor-bindings = <&inc_dec_kp A B>; 
 };
 
 &layer_adj {
@@ -292,5 +294,5 @@
             &out OUT_USB &trans       &trans       &trans                                    &trans      &trans      &trans      &trans      
                                       &trans       &trans                                    &trans      &trans      
     >;
-    sensor-bindings = <&scroll_enc_du>; 
+    sensor-bindings = <&inc_dec_kp A B>; 
 };
