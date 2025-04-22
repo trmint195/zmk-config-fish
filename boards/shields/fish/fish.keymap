@@ -184,6 +184,10 @@
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
+        combo_L_6TM {
+            key-positions = <3 13>;
+            bindings = <&kp RET>;
+        };
 
         // right basic
         combo_R_4TM {
@@ -202,6 +206,15 @@
             key-positions = <25 26>;
             bindings = <&kp PRCNT>;
             layers = < LDEF LMOD LNAV LSYM LADJ>;
+        };
+        combo_R_1TM {
+            key-positions = <4 14>;
+            bindings = <&kp LC(SPACE)>;
+        };
+        combo_R_56M {
+            key-positions = <18 19>;
+            bindings = <&kp RET>;
+            layers = < LMOD>;
         };
 
         // thum
@@ -224,7 +237,7 @@
 */
 &layer_def {
     bindings = <
-                     &kp W  &kp U &kp F &kp  Q          &kp K &kp L &kp R &kp Y   
+                     &kp W  &kp U &kp F &kp  Q          &kp K &kp L &kp R &kp Y  
 &lt LFUN DEL   &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
                &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
                    &lt LSYM TAB &lt LBST SPACE           &lt LBST SPACE &lt LNAV BSPC
@@ -260,9 +273,9 @@
 
 &layer_nav {
     bindings = <
-                    &kp LGUI      &kp N4      &kp N5    &kp N       &none    &kp PG_DN     &kp PG_UP     &msc SCRL_UP
-&kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &kp DOT     &kp LEFT &kp DOWN      &kp UP        &kp RIGHT &msc SCRL_DOWN &kp RET 
-         &kp LSHFT  &kp LALT      &none       &none                          &kp LC(PG_UP) &kp LC(PG_DN) &msc SCRL_LEFT  &msc SCRL_RIGHT
+                    &kp LGUI      &kp N4      &kp N5    &kp N       &msc SCRL_DOWN  &kp PG_DN     &kp PG_UP     &msc SCRL_UP
+&kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &kp DOT     &kp LEFT        &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp RET 
+         &kp LSHFT  &kp LALT      &none       &none                                 &kp LC(PG_UP) &kp LC(PG_DN) &kp HOME  &kp END
                                   &trans   &trans                 &trans &trans
                 &bootloader &kp B &kp C &kp D
                 &kp E &kp F &kp G &kp H
