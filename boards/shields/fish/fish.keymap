@@ -12,15 +12,17 @@
 #define LDEF 0
 #define LMOD 1
 #define LNAV 2
-#define LFUN 3
-#define LSYM 4
-#define LADJ 5
+#define LPNT 3
+#define LFUN 4
+#define LSYM 5
+#define LADJ 6
 /{
     keymap {
         compatible = "zmk,keymap";
         layer_def:layer_def{};
         layer_mod:layer_mod{};
         layer_nav:layer_nav{};
+        layer_pnt:layer_pnt{};
         layer_fun:layer_fun{};
         layer_sym:layer_sym{};
         layer_adj:layer_adj{};
@@ -83,9 +85,17 @@
             // &smo LFUN LSHFT : tap to sticky shift, hold to function layer
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
+            flavor = "balanced";
+            tapping-term-ms = <175>;
             bindings = <&mo>, <&sk>;
+        };
+        cwmo: caps_word_and_mo {
+            // &cwmo LFUN DUMMY : tap to caps_word, hold to function layer
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <175>;
+            bindings = <&mo>, <&caps_word>;
         };
         bspc_del: bspc_and_del{
             compatible = "zmk,behavior-mod-morph";
@@ -167,6 +177,10 @@
             key-positions = <0 1>;
             bindings = <&kp ESC>;
         };
+        combo_L_6TM {
+            key-positions = <3 13>;
+            bindings = <&kp F10>;
+        };
 
         // right basic
         combo_R_4TM {
@@ -184,21 +198,25 @@
         combo_R_23B {
             key-positions = <25 26>;
             bindings = <&kp PRCNT>;
-            layers = < LDEF LMOD LNAV LSYM LADJ>;
+        };
+        combo_R_1TM {
+            key-positions = <4 14>;
+            bindings = <&kp LC(SPACE)>;
         };
         combo_R_56M {
             key-positions = <18 19>;
-            bindings = <&kp RET>;
+            bindings = <&kp P>;
+            layers = <LMOD>;
         };
 
         // thum
         combo_L_thum {
             key-positions = <28 29>;
-            bindings = <&smo LFUN LSHFT>;
+            bindings = <&smo LPNT LSHFT>;
         };
         combo_R_thum {
             key-positions = <30 31>;
-            bindings = <&caps_word>;
+            bindings = <&cwmo LPNT LSHFT>;
         };
 
         // thum mod
@@ -233,7 +251,7 @@
 &layer_def {
     bindings = <
                      &kp W  &kp U &kp F &kp  Q          &kp K &kp L &kp R &kp Y   
-&lt LFUN ESC   &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
+&lt LFUN DEL   &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
                &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
                    &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
                 &mkp LCLK &mmv MOVE_DOWN &msc SCRL_DOWN &none
@@ -245,9 +263,9 @@
 &layer_mod {
     bindings = <
                     &kp W      &kp U     &kp F     &kp Q        &kp K &kp L &kp R &kp Y   
-&kp LGUI  &mt MC(E) &mt MS(I)  &mt MC(A) &mt MS(O) &kp MINUS    &kp G &kp T &kp N &kp S     &mt MC(H) &mt MG(P)
+&kp LGUI  &mt MC(E) &mt MS(I)  &mt MC(A) &mt MS(O) &kp MINUS    &kp G &kp T &kp N &kp S     &mt MC(H) &kp RET
           &mt MS(Z) &mt MA(X)  &kp C     &kp V                        &kp D &kp M &mt MA(J) &mt MS(B) 
-                                 &trans   &trans                 &lt LNAV LC(SPACE) &bspc_del
+                                 &trans   &trans                 &kp SPACE &bspc_del
                 &bootloader &kp B &kp C &kp D
                 &kp E &kp F &kp G &kp H
         >;
@@ -256,9 +274,9 @@
 
 &layer_nav {
     bindings = <
-                    &none         &none       &none     &kp N       &none    &kp PG_DN     &kp PG_UP     &kp RET
-&kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &kp DOT     &kp LEFT &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp LGUI 
-         &kp LSHFT  &kp LALT      &none       &none                          &kp LC(PG_UP) &kp LC(PG_DN) &kp HOME  &kp END    
+                    &alt_tab      &none       &none     &kp N       &kp LC(W) &kp PG_DN     &kp PG_UP     &kp LC(T)
+&kp LGUI &mt MC(N0) &kp N1        &kp N2      &kp N3    &kp DOT     &kp LEFT  &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp RET 
+         &kp LSHFT  &kp LALT      &kp N4      &kp N5                          &kp LC(PG_UP) &kp LC(PG_DN) &kp HOME  &kp END    
                                   &trans    &kp RET                          &kp SPACE   &bspc_del
                 &bootloader &kp B &kp C &kp D
                 &kp E &kp F &kp G &kp H
@@ -266,12 +284,23 @@
     sensor-bindings = <&scroll_enc_du>; 
 };
 
+&layer_pnt{
+    bindings = <
+                       &alt_tab  &kp TAB   &kp LA(UP)  &mkp MB5  &mkp MB4  &mkp LCLK      &mmv MOVE_UP   &msc SCRL_UP
+    &kp DEL &kp LCTRL  &mkp RCLK &mkp MCLK &mkp LCLK   &mkp MB4  &mkp MB5  &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN  &kp RET
+            &kp LSHFT  &kp LALT  &kp RET   &kp RET                         &mkp MCLK      &mkp RCLK      &msc SCRL_LEFT  &msc SCRL_RIGHT      
+                      &trans   &trans                  &kp SPACE &bspc_del
+                &bootloader &kp B &kp C &kp D
+                &kp E &kp F &kp G &kp H
+    >;
+    sensor-bindings = <&inc_dec_kp A B>; 
+};
 
 &layer_fun {
     bindings = <
-                   &alt_tab    &kp TAB &kp LS(F5) &kp F12     &kp DOT   &kp N7 &kp N8 &kp N9      
-&kp F1  &mt MC(F2) &kp F3      &kp F4  &kp F5     &kp F11     &kp COMMA &kp N4 &kp N5 &kp N6 &kp N0 &kp MINUS   
-        &mt MS(F7) &mt MA(F8)  &kp F9  &kp F10                          &kp N1 &kp N2 &kp N3 &kp N0      
+                   &alt_tab    &kp F1  &kp F11 &kp F12     &kp DOT   &kp N7 &kp N8 &kp N9      
+&none   &mt MC(F2) &kp F3      &kp F4  &kp F5  &kp MINUS   &kp COMMA &kp N4 &kp N5 &kp N6 &kp N0 &kp PLUS
+        &mt MS(F7) &mt MA(F8)  &kp F9  &kp F10                       &kp N1 &kp N2 &kp N3 &kp N0      
                       &trans   &trans                  &kp SPACE &bspc_del
                 &bootloader &kp B &kp C &kp D
                 &kp E &kp F &kp G &kp H
