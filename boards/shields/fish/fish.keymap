@@ -186,6 +186,10 @@
             bindings = <&kp PRCNT>;
             layers = < LDEF LMOD LNAV LSYM LADJ>;
         };
+        combo_R_56M {
+            key-positions = <18 19>;
+            bindings = <&kp RET>;
+        };
 
         // thum
         combo_L_thum {
