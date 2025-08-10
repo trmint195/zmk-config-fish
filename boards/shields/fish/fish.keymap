@@ -277,7 +277,7 @@
 &layer_def {
     bindings = < 
                      &kp W  &kp U &kp F &kp  Q          &kp K &kp L &kp R &kp Y   
-&lt LFUN IGUI  &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
+&lt LFUN LGUI  &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
                &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
                    &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
                 &mkp LCLK &mmv MOVE_DOWN &msc SCRL_DOWN &none
