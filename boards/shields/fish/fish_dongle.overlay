@@ -72,7 +72,10 @@
     };
 };
 
+
 &trackball_listener {
     status = "okay";
     device = <&trackball>;
+    input-processors = <&zip_mouse_gesture>;
+
 };

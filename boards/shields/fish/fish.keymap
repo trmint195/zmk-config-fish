@@ -4,6 +4,8 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
+#include <mouse-gesture.dtsi>
+
 
 /*
         ////////////////////
@@ -204,6 +206,16 @@
             key-positions = <3 13>;
             bindings = <&kp F10>;
         };
+        combo_L_12M {
+            key-positions = <8 9>;
+            bindings = <&mo LPNT>;
+            slow-release;
+        };
+        combo_L_1M2B {
+            key-positions = <8 20>;
+            bindings = <&mouse_gesture>;
+            slow-release;
+        };
 
         // right basic
         combo_R_4TM {
@@ -270,6 +282,39 @@
 };
 
 /*
+        //////////////////////
+        // input processors //
+        //////////////////////
+*/
+
+&zip_mouse_gesture {
+    stroke-size = <300>; // Optional (default: 500)
+    enable-eager-mode; // Optional, but recommended
+
+    history_back {
+        pattern = <GESTURE_RIGHT>;
+        bindings = <&kp LA(LEFT)>;
+    };
+
+    history_forward {
+        pattern = <GESTURE_LEFT>;
+        bindings = <&kp LA(RIGHT)>;
+    };
+
+    close_tab {
+        pattern = <GESTURE_DOWN GESTURE_RIGHT>;
+        bindings = <&kp LC(W)>;
+    };
+
+    new_tab {
+        pattern = <GESTURE_DOWN GESTURE_LEFT>;
+        bindings = <&kp LC(T)>;
+        wait-ms = <20>;  // Optional: wait time between behaviors (default: CONFIG_ZMK_MACRO_DEFAULT_WAIT_MS)
+        tap-ms = <40>;   // Optional: press duration for each behavior (default: CONFIG_ZMK_MACRO_DEFAULT_TAP_MS)
+    };
+};
+
+/*
         /////////////
         // keymaps //
         /////////////
@@ -314,7 +359,7 @@
     bindings = <
                        &mo LPNT3 &mo LPNT2 &mo LPNT   &mkp MB4       &mkp MB4  &mkp LCLK      &mmv MOVE_UP   &msc SCRL_UP
   &kp LGUI  &kp LCTRL  &mkp RCLK &mkp MCLK &mkp LCLK  &mkp MB5       &mkp MB5  &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN  &tog LPNT
-            &kp LSHFT  &kp LALT  &kp LC(C) &kp LC(V)                           &kp LC(T)      &kp LC(W)      &msc SCRL_LEFT  &msc SCRL_RIGHT      
+            &kp LSHFT  &kp LALT  &mouse_gesture &mouse_gesture                           &kp LC(T)      &kp LC(W)      &msc SCRL_LEFT  &msc SCRL_RIGHT      
                       &trans   &trans                  &kp SPACE      &bspc_del
                 &bootloader &kp B &kp C &kp D
                 &kp E &kp F &kp G &kp H
