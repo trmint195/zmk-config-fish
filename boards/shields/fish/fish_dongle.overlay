@@ -1,5 +1,8 @@
 
 #include "fish.dtsi"
+#include <dt-bindings/zmk/input_transform.h>
+
+
 
 &default_transform {
     row-offset = <4>;
@@ -76,6 +79,11 @@
 &trackball_listener {
     status = "okay";
     device = <&trackball>;
-    input-processors = <&zip_mouse_gesture>;
-
+    scroller {
+        layers = <1>;
+        input-processors = 
+            <&zip_xy_to_scroll_mapper>,
+            <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&zip_scroll_scaler 1 5>; 
+    };
 };
