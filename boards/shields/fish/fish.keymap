@@ -326,7 +326,7 @@
                &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
                    &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
                                 &mkp RCLK
-            &mo LPNT  &mkp MCLK &mkp LCLK
+            &mo LPNT  &mkp LCLK &mkp MCLK
             &mkp MB5            &mo LMOD
             &mkp MB4
         >;
