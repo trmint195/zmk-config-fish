@@ -329,7 +329,7 @@
             &mo LPNT  &mkp MCLK &mkp LCLK
             &mkp MB5            &mo LMOD
             &mkp MB4
-        >
+        >;
     sensor-bindings = <&scroll_enc_du>; 
 };
 
