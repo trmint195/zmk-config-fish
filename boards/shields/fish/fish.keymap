@@ -325,11 +325,11 @@
 &lt LFUN DEL  &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
                &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
                    &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
-                                &mkp MB5
-            &mo LMOD            &mkp MB4
-            &mkp LCLK &mkp RCLK &mo LPNT
-            &mkp MCLK
-        >;
+                                &mkp RCLK
+            &mo LPNT  &mkp MCLK &mkp LCLK
+            &mkp MB5            &mo LMOD
+            &mkp MB4
+        >
     sensor-bindings = <&scroll_enc_du>; 
 };
 
