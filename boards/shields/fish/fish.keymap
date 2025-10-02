@@ -278,6 +278,12 @@
             bindings = <&lm LMOD LCTRL>;
             slow-release;
         };
+
+        combo_D1 { // ctrl
+            key-positions = <32 34>;
+            bindings = <&mo LMOD>;
+            slow-release;
+        };
     };
 };
 
