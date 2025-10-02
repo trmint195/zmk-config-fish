@@ -280,7 +280,7 @@
         };
 
         combo_D1 { // ctrl
-            key-positions = <32 34>;
+            key-positions = <32 35>;
             bindings = <&mo LMOD>;
             slow-release;
         };
