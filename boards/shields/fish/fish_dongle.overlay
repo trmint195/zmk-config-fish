@@ -80,7 +80,7 @@
     status = "okay";
     device = <&trackball>;
     scroller {
-        layers = <1>;
+        layers = <7>;
         input-processors = 
             <&zip_xy_to_scroll_mapper>,
             <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,

@@ -289,7 +289,7 @@
 
         combo_D1 { // ctrl
             key-positions = <32 35>;
-            bindings = <&mo LMOD>;
+            bindings = <&mo LSYM>;
             slow-release;
         };
     };
@@ -341,7 +341,7 @@
                    &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
                                 &mkp RCLK
             &mo LPNT  &mkp LCLK &mkp MCLK
-            &mkp MB5            &mo LMOD
+            &mkp MB5            &mo LSYM
             &mkp MB4
         >;
     sensor-bindings = <&scroll_enc_du>; 
