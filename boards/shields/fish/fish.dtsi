@@ -3,11 +3,11 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
-        zmk,physical-layout = &physical_layout0;
+        zmk,matrix_transform = &fish_transform;
+        zmk,physical-layout = &fish_layout;
     };
 
-    default_transform: keymap_transform_0 {
+    fish_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         rows = <7>;
         columns = <8>;
@@ -29,23 +29,12 @@
         diode-direction = "row2col";
     };
 
-    physical_layout0: physical_layout_0 {
+    fish_layout: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
-        transform = <&default_transform>;
+        transform = <&fish_transform>;
     };
 
-    left_encoder: encoder_left {
-        compatible = "alps,ec11";
-        a-gpios = <&gpio0 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&gpio1 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        steps = <96>;
-        status = "disabled";
-    };
 
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        status = "disabled";
-    };
 
 };

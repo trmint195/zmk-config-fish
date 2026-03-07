@@ -4,8 +4,6 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
-#include <mouse-gesture.dtsi>
-
 
 /*
         ////////////////////
@@ -36,29 +34,6 @@
     };
 };
 
-/*
-        //////////////
-        // encoders //
-        //////////////
-*/
-/ {
-    sensors: sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&left_encoder>;
-        triggers-per-rotation = <24>;
-    };
-
-    behaviors{
-        scroll_enc_du: scroll_enc_du {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_Y(-100)>, <&msc MOVE_Y(100)>;
-            //bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-            tap-ms = <20>;
-        };
-
-    };
-};
 
 /*
         //////////////////////////
@@ -219,11 +194,6 @@
             bindings = <&mo LPNT>;
             slow-release;
         };
-        combo_L_1M2B {
-            key-positions = <8 20>;
-            bindings = <&mouse_gesture>;
-            slow-release;
-        };
 
         // right basic
         combo_R_4TM {
@@ -301,32 +271,6 @@
         //////////////////////
 */
 
-&zip_mouse_gesture {
-    stroke-size = <300>; // Optional (default: 500)
-    enable-eager-mode; // Optional, but recommended
-
-    history_back {
-        pattern = <GESTURE_RIGHT>;
-        bindings = <&kp LA(LEFT)>;
-    };
-
-    history_forward {
-        pattern = <GESTURE_LEFT>;
-        bindings = <&kp LA(RIGHT)>;
-    };
-
-    close_tab {
-        pattern = <GESTURE_DOWN GESTURE_RIGHT>;
-        bindings = <&kp LC(W)>;
-    };
-
-    new_tab {
-        pattern = <GESTURE_DOWN GESTURE_LEFT>;
-        bindings = <&kp LC(T)>;
-        wait-ms = <20>;  // Optional: wait time between behaviors (default: CONFIG_ZMK_MACRO_DEFAULT_WAIT_MS)
-        tap-ms = <40>;   // Optional: press duration for each behavior (default: CONFIG_ZMK_MACRO_DEFAULT_TAP_MS)
-    };
-};
 
 /*
         /////////////
@@ -344,7 +288,6 @@
             &mkp MB5            &mo LSYM
             &mkp MB4
         >;
-    sensor-bindings = <&scroll_enc_du>; 
 };
 
 &layer_mod {
@@ -358,7 +301,6 @@
             &trans &trans &trans
             &trans
         >;
-    sensor-bindings = <&scroll_enc_du>; 
 };
 
 &layer_nav {
@@ -372,21 +314,19 @@
             &trans &trans &trans
             &trans
     >;
-    sensor-bindings = <&scroll_enc_du>; 
 };
 
 &layer_pnt{
     bindings = <
                        &mo LPNT3 &mo LPNT2 &mo LPNT   &mkp MB4       &mkp MB4  &mkp LCLK      &mmv MOVE_UP   &msc SCRL_UP
   &kp LGUI  &kp LCTRL  &mkp RCLK &mkp MCLK &mkp LCLK  &mkp MB5       &mkp MB5  &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN  &tog LPNT
-            &kp LSHFT  &kp LALT  &mouse_gesture &mouse_gesture                           &kp LC(T)      &kp LC(W)      &msc SCRL_LEFT  &msc SCRL_RIGHT      
+            &kp LSHFT  &kp LALT  &trans         &trans                                   &kp LC(T)      &kp LC(W)      &msc SCRL_LEFT  &msc SCRL_RIGHT
                       &trans   &trans                  &kp SPACE      &bspc_del
                           &trans
             &trans        &trans
             &trans &trans &trans
             &trans
     >;
-    sensor-bindings = <&inc_dec_kp A B>; 
 };
 
 &layer_pnt2{
@@ -400,7 +340,6 @@
             &trans &trans &trans
             &trans
     >;
-    sensor-bindings = <&inc_dec_kp A B>; 
 };
 
 &layer_pnt3{
@@ -414,7 +353,6 @@
             &trans &trans &trans
             &trans
     >;
-    sensor-bindings = <&inc_dec_kp A B>; 
 };
 
 &layer_fun {
@@ -428,7 +366,6 @@
             &trans &trans &trans
             &trans
     >;
-    sensor-bindings = <&inc_dec_kp A B>; 
 };
 
 &layer_sym {
@@ -442,7 +379,6 @@
             &trans &trans &trans
             &trans
     >;
-    sensor-bindings = <&inc_dec_kp A B>; 
 };
 
 &layer_adj {
@@ -457,5 +393,4 @@
             &trans &trans &trans
             &trans
     >;
-    sensor-bindings = <&inc_dec_kp A B>; 
 };

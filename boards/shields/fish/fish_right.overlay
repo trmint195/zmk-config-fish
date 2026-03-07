@@ -1,7 +1,7 @@
 
 #include "fish.dtsi"
 
-&default_transform {
+&fish_transform {
     col-offset = <4>;
 };
 
