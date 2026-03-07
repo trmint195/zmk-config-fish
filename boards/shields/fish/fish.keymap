@@ -283,10 +283,6 @@
 &lt LFUN DEL  &kp E &kp I  &kp A &kp O &kp MINUS       &kp G &kp T &kp N &kp S &kp H &kp P
                &kp Z &kp X  &kp C &kp V                       &kp D &kp M &kp J &kp B 
                    &lt LSYM TAB &lth LMOD RET           &lt LNAV SPACE &bspc_del
-                                &mkp RCLK
-            &mo LPNT  &mkp LCLK &mkp MCLK
-            &mkp MB5            &mo LSYM
-            &mkp MB4
         >;
 };
 
@@ -296,10 +292,6 @@
 &kp LGUI  &mt MC(E) &mt MS(I)  &mt MC(A) &mt MS(O) &kp MINUS    &kp G &kp T &kp N &kp S     &mt MC(H) &kp P
           &mt MS(Z) &mt MA(X)  &kp C     &kp V                        &kp D &kp M &mt MA(J) &mt MS(B) 
                                  &trans   &trans                 &kp SPACE &bspc_del
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
         >;
 };
 
@@ -309,10 +301,6 @@
 &kp LGUI &kp LCTRL  &kp N4        &kp N5      &kp N6    &kp DOT     &kp LEFT  &kp DOWN      &kp UP        &kp RIGHT &kp LALT &kp RET
          &kp LSHFT  &mt MA(N7)    &kp N8      &kp N9                          &kp LC(PG_UP) &kp LC(PG_DN) &kp HOME  &kp END    
                                   &trans    &kp RET                           &kp SPACE   &bspc_del
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
     >;
 };
 
@@ -322,10 +310,6 @@
   &kp LGUI  &kp LCTRL  &mkp RCLK &mkp MCLK &mkp LCLK  &mkp MB5       &mkp MB5  &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &msc SCRL_DOWN  &tog LPNT
             &kp LSHFT  &kp LALT  &trans         &trans                                   &kp LC(T)      &kp LC(W)      &msc SCRL_LEFT  &msc SCRL_RIGHT
                       &trans   &trans                  &kp SPACE      &bspc_del
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
     >;
 };
 
@@ -335,10 +319,6 @@
   &tog LPNT &trans  &trans    &trans    &trans   &trans       &trans  &trans &trans &trans &trans  &tog LPNT
             &trans  &trans    &trans    &trans                        &trans &trans &trans &trans      
                       &trans   &trans                  &trans      &trans
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
     >;
 };
 
@@ -348,10 +328,6 @@
   &tog LPNT &trans  &trans    &trans    &trans   &trans       &trans  &trans &trans &trans &trans  &tog LPNT
             &trans  &trans    &trans    &trans                        &trans &trans &trans &trans      
                       &trans   &trans                  &trans      &trans
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
     >;
 };
 
@@ -361,10 +337,6 @@
 &none   &mt MC(F2) &kp F3      &kp F4  &kp F5  &kp MINUS   &kp COMMA &kp N4 &kp N5 &kp N6 &kp N0 &kp PLUS
         &mt MS(F7) &mt MA(F8)  &kp F9  &kp F10                       &kp N1 &kp N2 &kp N3 &kp N0      
                       &trans   &trans                  &kp SPACE &bspc_del
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
     >;
 };
 
@@ -374,10 +346,6 @@
 &kp TILDE &mt MC(EXCL) &kp LBKT &kp LPAR   &kp COLON &kp PIPE    &kp CARET  &kp FSLH   &kp RPAR  &kp RBKT  &mt MC(EQUAL) &kp PLUS 
           &kp GRAVE    &kp LT   &kp MINUS  &kp GT                           &kp QMARK  &kp DQT   &kp SQT   &kp BSLH 
                                 &trans     &kp RET               &kp SPACE   &bspc_del
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
     >;
 };
 
@@ -387,10 +355,5 @@
 &bootloader &out OUT_BLE &bt BT_SEL 3 &bt BT_SEL 4 &trans       &bt BT_CLR       &trans      &trans      &trans      &trans      &trans      &bootloader
             &out OUT_USB &trans       &trans       &trans                                    &trans      &trans      &trans      &trans      
                                       &trans       &trans                                    &trans      &trans      
-
-                          &trans
-            &trans        &trans
-            &trans &trans &trans
-            &trans
     >;
 };

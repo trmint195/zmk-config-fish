@@ -16,6 +16,12 @@
 
 // ============================================================
 // home_button overrides (samples — uncomment to override)
+//
+// INPUT_VIRTUAL_SYM_* enum definitions:
+//   zmk_modules/zmk-module-xiaord/include/dt-bindings/xiaord/input_codes.h
+//
+// Each symbol maps 1:1 to an LVGL LV_SYMBOL_* icon.
+// Icon reference: https://docs.lvgl.io/9.0/overview/font.html
 // ============================================================
 // &home_button_0 { code = <INPUT_VIRTUAL_SYM_UPLOAD>; };    /* 12 o'clock */
 &home_button_1 { code = <INPUT_VIRTUAL_SYM_KEYBOARD>; };     /*  1 o'clock — overridden: IMAGE → KEYBOARD */
