@@ -33,6 +33,7 @@ include:
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
   - board: xiao_ble//zmk
     shield: fish_right
+    artifact-name: fish_right
 
 
 
