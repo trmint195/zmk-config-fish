@@ -18,20 +18,20 @@
 #
 ---
 include:
-  - board: xiao_ble//zmk
+  - board: xiao_ble
     shield: settings_reset
-  - board: xiao_ble//zmk
+  - board: xiao_ble
     shield: xiaord fish_dongle
     artifact-name: fish_dongle
     # snippet: zmk-usb-logging
-  - board: xiao_ble//zmk
+  - board: xiao_ble
     shield: fish_left
     artifact-name: fish_left_peripheral
-  - board: xiao_ble//zmk
+  - board: xiao_ble
     shield: fish_left
     artifact-name: fish_left_central
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
-  - board: xiao_ble//zmk
+  - board: xiao_ble
     shield: fish_right
     artifact-name: fish_right
 
