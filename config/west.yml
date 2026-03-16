@@ -13,6 +13,6 @@ manifest:
       import: app/west.yml
     - name: zmk-module-xiaord
       remote: trmint195
-      revision: 8080
+      revision: main
   self:
     path: config
